@@ -158,11 +158,12 @@ alias gitup='git stash; git pull --rebase; git stash pop'
 if [ -f .aliases ]; then
    . .aliases
 fi
-
+# i hate tmux split panes but byobu themes are so adorable!
+# tried using byobu-screen but messed up somewhere. For next time!
 [ -r /home/harshit/.byobu/prompt ] && . /home/harshit/.byobu/prompt   #byobu-prompt#
 export EDITOR='emacs'
 export LESS='-imj5$R'
-export GREP_OPTIONS='-R --color=always'
+export GREP_OPTIONS='-inR --color=always'
 
 #function less {
 #    if (( $(wc -l < "$1") < ${LINES:-10} ))
