@@ -3,9 +3,9 @@
 ;;
 (setq home (getenv "HOME"))
 (setq emacslib (concat home "/emacslib"))
-(setq mmmpath (concat home "/emacslib/mmm-mode"))
 (setq load-path (append (list emacslib)
-			(list mmmpath)
+			(list (concat home "/.emacs.d/mmm-mode"))
+			(list (concat home "/.emacs.d"))
                         load-path))
 
 
@@ -49,7 +49,7 @@
 (autoload 'thrift-mode "thrift" nil t)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-(add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html$" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.thrift$" . thrift-mode))
 
@@ -421,6 +421,7 @@ go to the current line."
 (require 'mmm-auto)
 (setq mmm-global-mode 'maybe)
 (mmm-add-mode-ext-class 'html-mode "\\.php\\'" 'html-php)
+(require 'php-mode)
 ;;(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
 (global-set-key "\M-x"
   (lambda () (interactive)
