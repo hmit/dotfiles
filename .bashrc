@@ -118,7 +118,10 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# .bashrc
+# .mylikesrc
+if [ -f ~/.mylikesrc ]; then
+	. ~/.mylikesrc
+fi
 
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
@@ -129,7 +132,7 @@ export GOROOT=/usr/lib/go
 
 # Source global definitions
 if [ -f /etc/bashrc ]; then
-    . /etc/bashrc
+	. /etc/bashrc
 fi
 
 if [ "$TERM" = "dumb" ] ; then
@@ -158,18 +161,8 @@ alias gitup='git stash; git pull --rebase; git stash pop'
 if [ -f .aliases ]; then
    . .aliases
 fi
-# i hate tmux split panes but byobu themes are so adorable!
-# tried using byobu-screen but messed up somewhere. For next time!
+
 [ -r /home/harshit/.byobu/prompt ] && . /home/harshit/.byobu/prompt   #byobu-prompt#
 export EDITOR='emacs'
 export LESS='-imj5$R'
 export GREP_OPTIONS='-inR --color=always'
-
-#function less {
-#    if (( $(wc -l < "$1") < ${LINES:-10} ))
-#    then
-#	cat "$1"
-#    else
-#	/usr/bin/less "$1"
-#    fi
-#}
