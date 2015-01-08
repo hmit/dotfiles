@@ -14,7 +14,7 @@ set -qg mouse-select-pane on
 # shorter repeats; allows to use arrow keys to move around in a pane right away!
 # not using repeat functionality anyway
 set -qg repeat-time 150
-set -qg display-time 1000
+set -qg display-time 1500
 
 # window colors
 set -qwg window-status-current-attr default
@@ -24,7 +24,9 @@ set -qwg window-status-activity-attr bold
 # remap splits
 unbind '\' # server kill earlier
 unbind |
+unbind -
 bind '\' split-window
+bind - split-window
 bind | split-window -h
 
 # pane options
