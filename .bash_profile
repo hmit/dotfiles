@@ -11,8 +11,8 @@ fi
 
 # sync with remote on every login
 pushd "$HOME/dotfiles" >/dev/null
-rm .*~
-rm *~
+rm .*~ 2>/dev/null
+rm *~ 2>/dev/null
 git stash; git pull --rebase; git stash pop 2>/dev/null
 popd >/dev/null
 
