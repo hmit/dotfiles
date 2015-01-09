@@ -40,10 +40,12 @@ emacs_pkgs[json-reformat]="https://github.com/gongo/json-reformat.git"
 emacs_pkgs[json-mode]="https://github.com/joshwnj/json-mode.git"
 emacs_pkgs[elpy]="git@github.com:jorgenschaefer/elpy.git"
 
+pushd "$HOME/.emacs.d" >/dev/null
 for i in "${!emacs_pkgs[@]}"
 do
-    if [ ! -d "$HOME/.emacs.d/$i" ] ; then
+    if [ ! -d "$i" ] ; then
 	git clone ${emacs_pkgs[$i]}
-	ln -s "$HOME/.emacs.d/$i/$i.el" "$HOME/.emacs.d"
+	ln -s "$i/$i.el" "$HOME/.emacs.d/"
     fi
 done
+popd >/dev/null
