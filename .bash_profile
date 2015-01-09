@@ -11,13 +11,15 @@ fi
 
 # sync with remote on every login
 pushd "$HOME/dotfiles" >/dev/null
+rm .*~
+rm *~
 git stash; git pull --rebase; git stash pop 2>/dev/null
 popd >/dev/null
 
 # symlink the required dot files; ignore .git, README and backup files
-for dot_file in `ls -AB "$HOME/dotfiles" -I '.git' -I 'README*'`
+for dot_file in `ls -AB "$HOME/dotfiles"`
 do
-    if [ ! -e "$HOME/$dot_file" ] ; then
-	ln -v -s "$HOME/dotfiles/$dot_file" -t "$HOME"
+    if [ ! "$dot_file" == ".git" ] && [[ ! "$dot_file" == "README"* ]] && [ ! -e "$HOME/$dot_file" ] ; then
+	ln -v -s "$HOME/dotfiles/$dot_file" "$HOME"
     fi
 done
