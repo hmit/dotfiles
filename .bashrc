@@ -122,7 +122,7 @@ fi
 if [ -f ~/.mylikesrc ]; then
 	. ~/.mylikesrc
 fi
-
+export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
 export AWS_CONFIG_FILE=$HOME/.s3cfg
