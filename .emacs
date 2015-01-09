@@ -1,10 +1,13 @@
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("marmalade" . "https://marmalade-repo.org/packages/")
+			 ("melpa" . "http://melpa.milkbox.net/packages/")))
 ;;
 ;; Add emacslib to path
 ;;
+
 (setq home (getenv "HOME"))
 (setq emacslib (concat home "/emacslib"))
 (setq load-path (append (list (concat home "/emacslib"))
-			(list (concat home "/.emacs.d"))
 			(list (concat home "/.emacs.d/mmm-mode"))
                         load-path))
 
@@ -85,7 +88,8 @@
 (setq hilit-quietly t)
 (setq inhibit-startup-message t)
 (setq require-final-newline t)
-(setq completion-auto-help nil)
+(setq read-file-name-completion-ignore-case t)
+(setq completion-auto-help t)
 (setq sentence-end (concat sentence-end "\\|[;:]-)[ .!\"\t]*"))
 (setq sentence-end-double-space t)
 (setq shell-pushd-dunique t)
