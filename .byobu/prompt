@@ -1,1 +1,1 @@
-[ -r /usr/share/byobu/profiles/bashrc ] && . /usr/share/byobu/profiles/bashrc  #byobu-prompt#
+[ -r /$BYOBU_PREFIX//share/byobu/profiles/bashrc ] && . /$BYOBU_PREFIX/share/byobu/profiles/bashrc  #byobu-prompt#

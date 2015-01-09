@@ -164,7 +164,7 @@ if [ -f .aliases ]; then
    . .aliases
 fi
 
-[ -r /home/harshit/.byobu/prompt ] && . /home/harshit/.byobu/prompt   #byobu-prompt#
+[ -r $HOME/.byobu/prompt ] && . $HOME/.byobu/prompt   #byobu-prompt#
 export EDITOR='emacs'
 export LESS='-imj5$R'
 export GREP_OPTIONS='-inR --color=always'
