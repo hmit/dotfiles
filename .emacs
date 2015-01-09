@@ -427,3 +427,4 @@ go to the current line."
   (lambda () (interactive)
     (call-interactively (intern (ido-completing-read
     "M-x " (all-completions "" obarray 'commandp))))))
+(setq vc-follow-symlinks nil)
