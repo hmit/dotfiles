@@ -13,12 +13,19 @@ if [ ! -d "$HOME/dotfiles" ] ; then
     git clone git@github.com:hmit/dotfiles.git
 fi
 
-# sync with remote on every login
-pushd "$HOME/dotfiles" >/dev/null
-rm .*~ 2>/dev/null
-rm *~ 2>/dev/null
-git stash; git pull --rebase; git stash pop 2>/dev/null
-popd >/dev/null
+# daily pull from remote
+day=`date +%j`
+prev=`expr $day - 1`
+pref="$HOME/.sync_record"
+if [ ! -e "$pref.$day" ] ; then
+    pushd "$HOME/dotfiles" >/dev/null
+    rm .*~ 2>/dev/null
+    rm *~ 2>/dev/null
+    git stash; git pull --rebase; git stash pop 2>/dev/null
+    popd >/dev/null
+    touch "$pref.$day"
+    rm -rf "$pref.$prev" 2>/dev/null
+fi
 
 # symlink the required dot files; ignore .git, README and backup files
 for dot_file in `ls -AB "$HOME/dotfiles"`
