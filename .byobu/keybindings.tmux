@@ -2,9 +2,11 @@
 unbind -n F6
 
 # prefix setting
-unbind-key -n C-a
+unbind -n C-a
+unbind -n C-b
 set -qg prefix ^a
 set -qg prefix2 ^b
+bind b send-prefix -2
 
 # enable mouse support;
 # TODO: enable mouse support somewhere; doesn't work right now
