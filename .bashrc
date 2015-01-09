@@ -20,6 +20,9 @@ export HISTIGNORE='ls:bg:fg:history'
 # append to the history file, don't overwrite it
 shopt -s histappend
 
+# include hidden files when expanding filename patterns [from SO]
+shopt -s dotglob
+
 # for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=200000
