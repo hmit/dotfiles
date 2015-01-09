@@ -3,9 +3,9 @@
 ;;
 (setq home (getenv "HOME"))
 (setq emacslib (concat home "/emacslib"))
-(setq load-path (append (list emacslib)
-			(list (concat home "/.emacs.d/mmm-mode"))
+(setq load-path (append (list (concat home "/emacslib"))
 			(list (concat home "/.emacs.d"))
+			(list (concat home "/.emacs.d/mmm-mode"))
                         load-path))
 
 

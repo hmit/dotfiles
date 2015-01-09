@@ -3,29 +3,24 @@
 # for examples
 
 
-#disable sending START/STOP to the terminal. Especially useful when using screen, tmux, byobu
-stty -ixon
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
+#disable sending START/STOP to the terminal. Especially useful when using screen, tmux, byobu
+stty -ixon
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
 export HISTIGNORE='ls:bg:fg:history'
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# include hidden files when expanding filename patterns [from SO]
-shopt -s dotglob
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=200000
+
+shopt -s histappend      # append to the history file, don't overwrite it
+shopt -s dotglob         # include hidden files when expanding filename patterns [from SO]
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -125,7 +120,7 @@ fi
 if [ -f ~/.mylikesrc ]; then
 	. ~/.mylikesrc
 fi
-export PATH="$(brew --prefix coreutils)/libexec/gnubin:/usr/local/bin:$PATH"
+export PATH="/usr/local/opt/emacs/bin/:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
 export AWS_CONFIG_FILE=$HOME/.s3cfg
