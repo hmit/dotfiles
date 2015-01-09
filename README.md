@@ -10,6 +10,7 @@ TODO:
 * Setup a host specific .bashrc extension
 * Remove .emacs.d from the load path; sub dir it instead
 * Read and add shopt as needed
+* Get rid of the emacs package list non-sense in .bash_profile; replace with loading emacs --daemon at startup
 
 Emacs packages:
 * git@github.com:jorgenschaefer/elpy.git

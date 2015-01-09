@@ -1,13 +1,3 @@
-# include .bashrc if it exists
-if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
-
 # clone my dotfiles
 if [ ! -d "$HOME/dotfiles" ] ; then
     git clone git@github.com:hmit/dotfiles.git
@@ -25,6 +15,11 @@ if [ ! -e "$pref.$day" ] ; then
     popd >/dev/null
     touch "$pref.$day"
     rm -rf "$pref.$prev" 2>/dev/null
+fi
+
+# include .bashrc if it exists
+if [ -f "$HOME/.bashrc" ]; then
+    . "$HOME/.bashrc"
 fi
 
 # symlink the required dot files; ignore .git, README and backup files
