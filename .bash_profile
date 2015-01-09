@@ -27,3 +27,23 @@ do
 	ln -v -s "$HOME/dotfiles/$dot_file" "$HOME"
     fi
 done
+
+if [ -d "$HOME/.emacs.d" ] ; then
+    mkdir -p "$HOME/.emacs.d"
+fi
+
+declare -A emacs_pkgs
+emacs_pkgs[php-mode]="git@github.com:ejmr/php-mode.git"
+emacs_pkgs[mmm-mode]="git@github.com:purcell/mmm-mode.git"
+emacs_pkgs[json-snatcher]="https://github.com/Sterlingg/json-snatcher.git"
+emacs_pkgs[json-reformat]="https://github.com/gongo/json-reformat.git"
+emacs_pkgs[json-mode]="https://github.com/joshwnj/json-mode.git"
+emacs_pkgs[elpy]="git@github.com:jorgenschaefer/elpy.git"
+
+for i in "${!emacs_pkgs[@]}"
+do
+    if [ ! -d "$HOME/.emacs.d/$i" ] ; then
+	git clone ${emacs_pkgs[$i]}
+	ln -s "$HOME/.emacs.d/$i/$i.el" "$HOME/.emacs.d"
+    fi
+done
