@@ -5,6 +5,12 @@ So these are my personal configuration.
 I started paying close attention to my .emacs file fairly recently and just keeping it here for record.
 i'm not uploading any of the actual plugins here but would add those hyperlinks in this readme at some point in the future...
 
+TODO:
+* Get rid of the ls non-sense in .bashrc
+* Setup a host specific .bashrc extension
+* Remove .emacs.d from the load path; sub dir it instead
+* Read and add shopt as needed
+
 Emacs packages:
 * git@github.com:jorgenschaefer/elpy.git
 * https://github.com/joshwnj/json-mode.git
