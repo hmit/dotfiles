@@ -2,14 +2,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
-
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
 
-#disable sending START/STOP to the terminal. Especially useful when using screen, tmux, byobu
+# Source global definitions
+[ -r /etc/bashrc ] && . /etc/bashrc
+
+# disable START/STOP signal to the terminal. Especially useful when using screen, tmux, byobu
 stty -ixon
 
 # don't put duplicate lines or lines starting with space in the history.
@@ -21,10 +23,9 @@ export HISTFILESIZE=200000
 
 shopt -s histappend      # append to the history file, don't overwrite it
 shopt -s dotglob         # include hidden files when expanding filename patterns [from SO]
-
-# check the window size after each command and, if necessary,
-# update the values of LINES and COLUMNS.
-shopt -s checkwinsize
+shopt -s checkwinsize    # check window size after each command; update LINES and COLUMNS
+shopt -s expand_aliases  # aliases are expanded; default for most interactive shells
+shopt -s cmdhist         # try to save multi-line commands in a single file
 
 # If set, the pattern "**" used in a pathname expansion context will
 # match all files and zero or more directories and subdirectories.
@@ -96,15 +97,6 @@ alias l='ls -CF'
 #   sleep 10; alert
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -116,10 +108,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# .mylikesrc
-if [ -f ~/.mylikesrc ]; then
-	. ~/.mylikesrc
-fi
 export PATH="$HOME/bin:/usr/local/opt/emacs/bin/:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
@@ -128,11 +116,6 @@ export AWS_CONFIG_FILE=$HOME/.s3cfg
 export GOPATH=$ROOT/go
 export GOROOT=/usr/lib/go
 
-# Source global definitions
-if [ -f /etc/bashrc ]; then
-	. /etc/bashrc
-fi
-
 if [ "$TERM" = "dumb" ] ; then
     export PS1="[\u@\h] [\w] > "
     unset GREP_OPTIONS
@@ -140,26 +123,20 @@ else
     PS1="\[\033[01;37m\][\[\033[01;31m\]\u\[\033[01;37m\]@\[\033[01;32m\]\h\[\033[01;37m\]] [\[\033[01;34m\]\w\[\033[01;37m\]]\$ \[\033[00m\]"
 fi
 
-# History options
-HISTCONTROL=ignoredups
-shopt -s cmdhist
-
 export PROMPT_COMMAND="history -a; history -c; history -r; if [ $TERM = 'screen' ]; then echo -ne '\033k${USER}@${HOSTNAME}\033\\'; fi;$PROMPT_COMMAND"
 
-# standard ubuntu aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
-alias gitup='git stash; git pull --rebase; git stash pop'
+[ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+[ -r "$HOME/.bash_aliases" ] && . "$HOME/.bash_aliases"
 
-# bash completion
-. /etc/bash_completion
+[ -r /etc/bash_completion ] && . /etc/bash_completion     # bash completion
+[ -r "$HOME/.byobu/prompt" ] && . "$HOME/.byobu/prompt"   # byobu-prompt#
+[ -r "$HOME/.mylikesrc" ] && . "$HOME/.mylikesrc"
+[ -r "$HOME/.`hostname`rc" ] && . "$HOME/.`hostname`rc"   # load any host specific file if it exists
 
-if [ -f .aliases ]; then
-   . .aliases
-fi
-
-[ -r $HOME/.byobu/prompt ] && . $HOME/.byobu/prompt   #byobu-prompt#
 export EDITOR='emacs'
 export LESS='-imj5$R'
 export GREP_OPTIONS='-inR --color=always'

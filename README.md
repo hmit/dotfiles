@@ -11,6 +11,7 @@ TODO:
 * Remove .emacs.d from the load path; sub dir it instead
 * Read and add shopt as needed
 * Get rid of the emacs package list non-sense in .bash_profile; replace with loading emacs --daemon at startup
+* Delete the sync_record file for the last day of the year [365]
 
 Emacs packages:
 * git@github.com:jorgenschaefer/elpy.git

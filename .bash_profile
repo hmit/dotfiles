@@ -9,8 +9,6 @@ prev=`expr $day - 1`
 pref="$HOME/.sync_record"
 if [ ! -e "$pref.$day" ] ; then
     pushd "$HOME/dotfiles" >/dev/null
-    rm .*~ 2>/dev/null
-    rm *~ 2>/dev/null
     git stash; git pull --rebase; git stash pop 2>/dev/null
     popd >/dev/null
     touch "$pref.$day"
@@ -18,21 +16,17 @@ if [ ! -e "$pref.$day" ] ; then
 fi
 
 # include .bashrc if it exists
-if [ -f "$HOME/.bashrc" ]; then
-    . "$HOME/.bashrc"
-fi
+[ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
 
 # symlink the required dot files; ignore .git, README and backup files
 for dot_file in `ls -AB "$HOME/dotfiles"`
 do
-    if [ ! "$dot_file" == ".git" ] && [[ ! "$dot_file" == "README"* ]] && [ ! -e "$HOME/$dot_file" ] ; then
+    if [[ ! "$dot_file" ~ ".git"* ]] && [[ ! "$dot_file" == "README"* ]] && [ ! -e "$HOME/$dot_file" ] ; then
 	ln -v -s "$HOME/dotfiles/$dot_file" "$HOME"
     fi
 done
 
-if [ -d "$HOME/.emacs.d" ] ; then
-    mkdir -p "$HOME/.emacs.d"
-fi
+[ -d "$HOME/.emacs.d" ] && mkdir -p "$HOME/.emacs.d"
 
 declare -A emacs_pkgs
 emacs_pkgs[php-mode]="git@github.com:ejmr/php-mode.git"
