@@ -107,6 +107,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+[ -r "$HOME/.mylikesrc" ] && . "$HOME/.mylikesrc"
 
 export PATH="$HOME/bin:/usr/local/opt/emacs/bin/:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
@@ -134,7 +135,6 @@ export PROMPT_COMMAND="history -a; history -c; history -r; if [ $TERM = 'screen'
 
 [ -r /etc/bash_completion ] && . /etc/bash_completion     # bash completion
 [ -r "$HOME/.byobu/prompt" ] && . "$HOME/.byobu/prompt"   # byobu-prompt#
-[ -r "$HOME/.mylikesrc" ] && . "$HOME/.mylikesrc"
 [ -r "$HOME/.`hostname`rc" ] && . "$HOME/.`hostname`rc"   # load any host specific file if it exists
 
 export EDITOR='emacs'

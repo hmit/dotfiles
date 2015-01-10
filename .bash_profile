@@ -4,8 +4,8 @@ if [ ! -d "$HOME/dotfiles" ] ; then
 fi
 
 # daily pull from remote
-day=`date +%j`
-prev=`expr $day - 1`
+day=`date +%-w`
+prev=$(((($day+6))%7))
 pref="$HOME/.sync_record"
 if [ ! -e "$pref.$day" ] ; then
     pushd "$HOME/dotfiles" >/dev/null
