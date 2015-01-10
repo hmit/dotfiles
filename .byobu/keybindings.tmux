@@ -64,21 +64,10 @@ bind C-k confirm-before kill-window
 
 # enable pipe-pane for long outputs; hack until i learn copy-mode
 unbind C-p
-bind C-p pipep -o 'mkdir ~/byobu-pipes; cat >>~/byobu-pipes/output.#I-#P' \; display-message "logging toggle to $HOME/byobu-pipes/output.#I-#P"
+bind C-p pipep -o 'mkdir ~/byobu-pipes; cat >>~/byobu-pipes/output.#I-#P' \; display-message "logging toggle to $HOME/byobu-pipes/output.#I.#P"
 
-# remove session bindings from meta
-unbind -n M-Left
-unbind -n M-Right
-unbind -n M-Up
-unbind -n M-Down
-unbind M-Left
-unbind M-Right
-unbind M-Up
-unbind M-Down
-
-# TODO: left, right bindings aren't working right now!
-# possible explanation here: http://superuser.com/questions/660013/resizing-pane-is-not-working-for-tmux-on-mac
-bind M-Left resizep -R 8
-bind M-Right resizep -L 8
-bind M-Up resizep -U 8
-bind M-Down resizep -D 8
+# for OSX terminal here: http://superuser.com/questions/660013/resizing-pane-is-not-working-for-tmux-on-mac
+bind C-Left resizep -L 8
+bind C-Right resizep -R 8
+bind C-Up resizep -U 8
+bind C-Down resizep -D 8
