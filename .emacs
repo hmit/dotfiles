@@ -17,7 +17,6 @@
 ;; and the keypad delete the character under the cursor and to the right
 ;; under X, instead of the default, backspace behavior.
 (global-set-key [delete] 'delete-char)
-;; (global-set-key "\C-h" 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 
 ;; Require a final newline in a file, to avoid confusing some tools
@@ -79,11 +78,13 @@
 (setq indent-tabs-mode nil)
 
 ;; Miscellaneous emacs mode stuff
+(setq show-paren-mode t)
+(setq vc-follow-symlinks nil)
 (setq column-number-mode t)
-(global-font-lock-mode t)
+(setq global-font-lock-mode t)
 (setq adaptive-fill-mode t)
 (setq paragraph-start paragraph-separate)
-(setq next-screen-context-lines 1)
+(setq next-screen-context-lines 5)
 (setq mouse-scroll-delay .05)
 (setq next-line-add-newlines nil)
 (setq hilit-quietly t)
@@ -109,7 +110,6 @@
 ;;
 
 ;; explicit mappings to for special keys to overcome terminfo problems
-;; (define-key esc-map "\C-h" 'backward-kill-word)
 (define-key esc-map "[1~" 'beginning-of-buffer)
 (define-key esc-map "[7~" 'beginning-of-buffer)
 (define-key esc-map "[4~" 'end-of-buffer)
@@ -125,7 +125,6 @@
 (global-set-key "\C-xf" 'font-lock-fontify-buffer)
 (global-set-key "\C-r" 'isearch-backward-regexp)
 (global-set-key "\C-s" 'isearch-forward-regexp)
-;; (global-set-key "\C-h" 'delete-backward-char)
 (global-set-key "\C-z" 'my-scroll-forward)
 (global-set-key [backspace] 'backward-delete-char)
 (global-set-key [home] 'beginning-of-buffer)
@@ -153,7 +152,6 @@
 (define-key ctl-x-map "S" 'shrink-window)
 (define-key ctl-x-map "4t" 'find-tag-other-window)
 (define-key ctl-x-map "4T" 'find-tag-other-window)
-;; (define-key ctl-x-map "r" 'vc-toggle-read-only)
 (define-key esc-map "j" 'fill-paragraph)
 (define-key esc-map "J" 'fill-paragraph)
 (define-key esc-map "q" 'query-replace-regexp)
@@ -322,12 +320,6 @@ go to the current line."
     (widen)))
 
 
-;; MISC
-(defvar *my-kill-query* (lambda () (yes-or-no-p "Really kill Emacs? ")))
-
-;; (if (not (memq *my-kill-query* kill-emacs-query-functions))
-;;     (setq kill-emacs-query-functions (cons *my-kill-query* kill-emacs-query-functions)))
-
 (defun get-empty-buffer (name)
   (let ((b (get-buffer-create name)))
     (save-excursion
@@ -403,12 +395,18 @@ go to the current line."
 (add-hook 'python-mode-hook
           '(lambda ()
              (define-key python-mode-map (kbd "C-c p")
-                         'my-py-lint)))
+	       'my-py-lint)))
 
 (add-hook 'python-mode-hook
           '(lambda ()
              (define-key python-mode-map (kbd "C-c P")
-                         'my-py-breaking)))
+               'my-py-breaking)))
+(setq compilation-finish-functions 'compile-autoclose)
+(defun compile-autoclose (buffer string)
+  (cond ((string-match "finished" string)
+         (message "Compiled okay! Window closed.")
+         (delete-window (get-buffer-window (get-buffer "*compilation*"))))
+        (t (message "Compilation %s" string))))
 
 (require 'ido)
 (setq ido-enable-flex-matching t)
@@ -420,15 +418,12 @@ go to the current line."
 (ido-mode t)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-set-key (kbd "C-\\") (kbd "C-c @ C-c"))
-(show-paren-mode 1)
 (require 'json-mode)
 (require 'mmm-auto)
 (setq mmm-global-mode 'maybe)
 (mmm-add-mode-ext-class 'html-mode "\\.php\\'" 'html-php)
 (require 'php-mode)
-;;(load "/usr/share/emacs/site-lisp/nxhtml/autostart.el")
 (global-set-key "\M-x"
   (lambda () (interactive)
     (call-interactively (intern (ido-completing-read
     "M-x " (all-completions "" obarray 'commandp))))))
-(setq vc-follow-symlinks nil)
