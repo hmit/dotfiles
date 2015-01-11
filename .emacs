@@ -91,7 +91,6 @@
 (setq require-final-newline t)
 (setq read-file-name-completion-ignore-case t)
 (setq completion-auto-help t)
-(setq sentence-end (concat sentence-end "\\|[;:]-)[ .!\"\t]*"))
 (setq sentence-end-double-space t)
 (setq shell-pushd-dunique t)
 (setq shell-pushd-tohome nil)
