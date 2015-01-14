@@ -407,8 +407,8 @@ go to the current line."
          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
         (t (message "Compilation %s" string))))
 
-(defun backward-kill-line (arg)
-  "Kill ARG lines backward"
+(defun backward-kill-line ()
+  "Kill 1 line backward"
   (interactive "p")
   (kill-line 0))
 (global-set-key (kbd "M-k") 'backward-kill-line)
@@ -432,4 +432,13 @@ go to the current line."
   (lambda () (interactive)
     (call-interactively (intern (ido-completing-read
     "M-x " (all-completions "" obarray 'commandp))))))
-(show-paren-mode 1)
+(show-paren-mode 1) ;; the setq is mode specific and hence doesn't work sometimes
+(defun my-reload-init ()
+  "reloads the profile file ~/.emacs"
+  (interactive)
+  (load-file (concat home "/.emacs")))
+(global-set-key (kbd "M-R") 'my-reload-init)
+
+(setq-default mode-line-format (list "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
+ `(vc-mode vc-mode)
+   "  " mode-line-modes mode-line-misc-info "- " system-name mode-line-end-spaces))
