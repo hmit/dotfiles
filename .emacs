@@ -20,7 +20,6 @@
 (global-set-key [kp-delete] 'delete-char)
 
 ;; Require a final newline in a file, to avoid confusing some tools
-
 (setq require-final-newline t)
 (setq indent-tabs-mode nil)
 (setq tab-width 4)
@@ -78,7 +77,7 @@
 (setq indent-tabs-mode nil)
 
 ;; Miscellaneous emacs mode stuff
-(setq show-paren-mode t)
+(setq kill-whole-line t) ;; delete the new-line char too if at the start of the line
 (setq vc-follow-symlinks nil)
 (setq column-number-mode t)
 (setq global-font-lock-mode t)
@@ -408,6 +407,12 @@ go to the current line."
          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
         (t (message "Compilation %s" string))))
 
+(defun backward-kill-line (arg)
+  "Kill ARG lines backward"
+  (interactive "p")
+  (kill-line 0))
+(global-set-key (kbd "M-k") 'backward-kill-line)
+
 (require 'ido)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
@@ -427,3 +432,4 @@ go to the current line."
   (lambda () (interactive)
     (call-interactively (intern (ido-completing-read
     "M-x " (all-completions "" obarray 'commandp))))))
+(show-paren-mode 1)
