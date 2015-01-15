@@ -400,12 +400,16 @@ go to the current line."
           '(lambda ()
              (define-key python-mode-map (kbd "C-c P")
                'my-py-breaking)))
-(setq compilation-finish-functions 'compile-autoclose)
+(setq compilation-auto-jump-to-first-error t)
 (defun compile-autoclose (buffer string)
   (cond ((string-match "finished" string)
          (message "Compiled okay! Window closed.")
          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
         (t (message "Compilation %s" string))))
+
+(setq compilation-finish-functions 'compile-autoclose)
+;; To use display buffer alist for this sort of task
+;; (setq special-display-buffer-names "*compilation*")
 
 (defun backward-kill-line ()
   "Kill 1 line backward"
