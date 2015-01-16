@@ -52,7 +52,7 @@
 
 # Minimum network throughput that triggers the notification (in kbit/s)
 # Default: 20
-#NETWORK_THRESHOLD=20
+NETWORK_THRESHOLD=50
 
 # You can add an additional source of temperature here
 #MONITORED_TEMP=/proc/acpi/thermal_zone/THM0/temperature
@@ -71,8 +71,8 @@
 # The users notification normally counts ssh sessions; set this configuration to '1'
 # to instead count number of distinct users logged onto the system
 # Default: 0
-#USERS_DISTINCT=0
+USERS_DISTINCT=1
 
 # Set this to zero to hide seconds int the time display
 # Default 1
-#TIME_SECONDS=0
+TIME_SECONDS=1
