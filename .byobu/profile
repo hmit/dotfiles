@@ -1,1 +1,2 @@
 source $BYOBU_PREFIX/share/byobu/profiles/common
+defscrollback 30000
