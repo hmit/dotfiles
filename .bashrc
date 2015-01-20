@@ -14,6 +14,7 @@ esac
 # disable START/STOP signal to the terminal. Especially useful when using screen, tmux, byobu
 stty -ixon
 
+export BYOBU_DISTRO=Ubuntu
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 export HISTCONTROL=ignoreboth:erasedups
