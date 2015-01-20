@@ -13,7 +13,7 @@ set -qg mouse-select-pane on
 # shorter repeats; allows to use arrow keys to move around in a pane right away!
 # not using repeat functionality anyway
 set -qg repeat-time 150
-set -qg display-time 1500
+set -qg display-time 2500
 
 # window colors
 set -qwg window-status-current-attr default
