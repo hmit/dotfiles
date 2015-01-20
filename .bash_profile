@@ -11,8 +11,8 @@ if [ ! -e "$pref.$day" ] ; then
     pushd "$HOME/dotfiles" >/dev/null
     git stash; git pull --rebase; git stash pop 2>/dev/null
     popd >/dev/null
+    rm -rf "$pref".* 2>/dev/null
     touch "$pref.$day"
-    rm -rf "$pref.$prev" 2>/dev/null
 fi
 
 # include .bashrc if it exists
