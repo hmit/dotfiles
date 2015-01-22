@@ -117,6 +117,10 @@ export PROMPT_COMMAND="history -a; history -c; history -r; if [ $TERM = 'screen'
 [ -r "$HOME/.byobu/prompt" ] && . "$HOME/.byobu/prompt"   # byobu-prompt#
 [ -r "$HOME/.`hostname`rc" ] && . "$HOME/.`hostname`rc"   # load any host specific file if it exists
 
+function oneline {
+    echo "for branch $1"
+    git log --oneline $1 | head -n 15
+}
 export EDITOR='emacs'
 export LESS='-imj5$R'
 export GREP_OPTIONS='-inR --color=always'
