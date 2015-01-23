@@ -118,8 +118,13 @@ export PROMPT_COMMAND="history -a; history -c; history -r; if [ $TERM = 'screen'
 [ -r "$HOME/.`hostname`rc" ] && . "$HOME/.`hostname`rc"   # load any host specific file if it exists
 
 function oneline {
-    echo "for branch $1"
-    git log --oneline $1 | head -n 15
+    bname=`git rev-parse --abbrev-ref HEAD`
+    if [ ! -z $1 ]
+    then
+	bname=$1
+    fi
+    echo "for branch $bname"
+    git log --oneline $bname | head -n 15
 }
 export EDITOR='emacs'
 export LESS='-imj5$R'
