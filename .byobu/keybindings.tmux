@@ -20,6 +20,9 @@ set -qwg window-status-current-attr default
 set -qwg window-status-current-fg brightred
 set -qwg window-status-activity-attr bold
 
+# map t to copy mode; earlier time
+unbind t
+bind t copy-mode
 # remap splits
 unbind '\' # server kill earlier
 unbind |
