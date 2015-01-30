@@ -411,7 +411,7 @@ go to the current line."
 ;; To use display buffer alist for this sort of task
 ;; (setq special-display-buffer-names "*compilation*")
 
-(defun backward-kill-line ()
+(defun backward-kill-line (arg)
   "Kill 1 line backward"
   (interactive "p")
   (kill-line 0))
