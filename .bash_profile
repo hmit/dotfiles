@@ -29,12 +29,12 @@ done
 [ -d "$HOME/.emacs.d" ] && mkdir -p "$HOME/.emacs.d"
 
 declare -A emacs_pkgs
-emacs_pkgs[php-mode]="git@github.com:ejmr/php-mode.git"
-emacs_pkgs[mmm-mode]="git@github.com:purcell/mmm-mode.git"
+emacs_pkgs[php-mode]="https://github.com/ejmr/php-mode.git"
+emacs_pkgs[mmm-mode]="https://github.com/purcell/mmm-mode.git"
 emacs_pkgs[json-snatcher]="https://github.com/Sterlingg/json-snatcher.git"
 emacs_pkgs[json-reformat]="https://github.com/gongo/json-reformat.git"
 emacs_pkgs[json-mode]="https://github.com/joshwnj/json-mode.git"
-emacs_pkgs[elpy]="git@github.com:jorgenschaefer/elpy.git"
+emacs_pkgs[elpy]="https://github.com/jorgenschaefer/elpy.git"
 
 pushd "$HOME/.emacs.d" >/dev/null
 for i in "${!emacs_pkgs[@]}"
