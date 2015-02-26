@@ -7,13 +7,13 @@
 
 (setq home (getenv "HOME"))
 (setq emacslib (concat home "/emacslib"))
-(setq load-path (append (list (concat home "/emacslib"))
-			(list (concat home "/.emacs.d"))
-			(list (concat home "/.emacs.d/mmm-mode"))
-                        load-path))
+(let ((default-directory "~/.emacs.d/lisp/"))
+  (normal-top-level-add-subdirs-to-load-path))
+(let ((default-directory "~/emacslib"))
+  (normal-top-level-add-subdirs-to-load-path))
 
 (setq custom-theme-load-path (append (list (concat home "/.emacs.d/solarized"))
-				     custom-theme-load-path))
+                                     custom-theme-load-path))
 
 ;; Set up the keyboard so the delete key on both the regular keyboard
 ;; and the keypad delete the character under the cursor and to the right
@@ -345,6 +345,8 @@ go to the current line."
  '(font-lock-function-name-face ((((class color) (min-colors 8)) (:foreground "orange" :weight bold)))))
   ;; If there is more than one, they won't work right.
 
+(require 'git-gutter)
+(global-git-gutter-mode +1)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -452,11 +454,7 @@ go to the current line."
  `(vc-mode vc-mode)
    "  " mode-line-modes mode-line-misc-info "- " system-name mode-line-end-spaces))
 
-(add-hook 'after-init-hook 'global-git-gutter-mode)
-
-
-
-;; (require 'powerline)
-;; (powerline-default-theme)
+(require 'powerline)
+(powerline-default-theme)
 (load-theme 'solarized t)
 (setq frame-background-mode 'dark)
