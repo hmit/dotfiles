@@ -1,138 +1,162 @@
-""""""""""""""""""""""""""
-" VUNDLE SETUP START
+" File: .vimrc
+" Author: Jake Zimmerman <jake@zimmerman.io>
 "
- set nocompatible               " be iMproved
- filetype off                   " required!
+" How I configure Vim :P
+"
 
- set rtp+=~/.vim/bundle/Vundle.vim
- call vundle#begin()
+" Gotta be first
+set nocompatible
 
- " let Vundle manage Vundle
- " required!
- Plugin 'gmarik/Vundle.vim'
+filetype off
 
+set rtp+=~/Vundle.vim
+call vundle#begin()
 
- " My Plugins
- Plugin 'Lokaltog/vim-powerline'
- Plugin 'Lokaltog/powerline-fonts'
- Plugin 'trailing-whitespace'
- Plugin 'tpope/vim-fugitive'
- Plugin 'altercation/vim-colors-solarized'
+Plugin 'gmarik/Vundle.vim'
 
- filetype plugin indent on     " required!
- "
- " Brief help
- " :PluginList          - list configured Plugins
- " :PluginInstall(!)    - install(update) Plugins
- " :PluginSearch(!) foo - search(or refresh cache first) for foo
- " :PluginClean(!)      - confirm(or auto-approve) removal of unused Plugins
- "
- " see :h vundle for more details or wiki for FAQ
- " NOTE: comments after Plugin command are not allowed..
+" ----- Making Vim look good ------------------------------------------
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'tomasr/molokai'
+Plugin 'bling/vim-airline'
+
+" ----- Vim as a programmer's text editor -----------------------------
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'scrooloose/syntastic'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-easytags'
+Plugin 'majutsushi/tagbar'
+Plugin 'kien/ctrlp.vim'
+Plugin 'vim-scripts/a.vim'
+
+" ----- Working with Git ----------------------------------------------
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+" ----- Other text editing features -----------------------------------
+Plugin 'Raimondi/delimitMate'
+
+" ----- man pages, tmux -----------------------------------------------
+Plugin 'jez/vim-superman'
+Plugin 'christoomey/vim-tmux-navigator'
+
+" ----- Syntax plugins ------------------------------------------------
+Plugin 'jez/vim-c0'
+Plugin 'jez/vim-ispc'
+Plugin 'kchmck/vim-coffee-script'
+
+" ---- Extras/Advanced plugins ----------------------------------------
+" Highlight and strip trailing whitespace
+"Plugin 'ntpeters/vim-better-whitespace'
+" Easily surround chunks of text
+"Plugin 'tpope/vim-surround'
+" Align CSV files at commas, align Markdown tables, and more
+"Plugin 'godlygeek/tabular'
+" Automaticall insert the closing HTML tag
+"Plugin 'HTML-AutoCloseTag'
+" Make tmux look like vim-airline (read README for extra instructions)
+"Plugin 'edkolev/tmuxline.vim'
+" All the other syntax plugins I use
+"Plugin 'ekalinin/Dockerfile.vim'
+"Plugin 'digitaltoad/vim-jade'
+"Plugin 'tpope/vim-liquid'
+"Plugin 'cakebaker/scss-syntax.vim'
 
 call vundle#end()
 
-" VUNDLE SETUP END
-""""""""""""""""""""""""""
+filetype plugin indent on
+
+" --- General settings ---
+set backspace=indent,eol,start
+set ruler
+set number
+set showcmd
+set incsearch
+set hlsearch
 
 syntax on
 
-" Default Google Settings - Disabled on Mac
-" source /usr/share/vim/google/google.vim
-
-" Mouse and Numbering
-set number
 set mouse=a
 
-" Tab handling
-set expandtab
-set shiftwidth=2
-set softtabstop=2
+" ----- Plugin-Specific Settings --------------------------------------
 
-" perforce commands
-command! -nargs=* -complete=file PEdit :!g4 edit %
-command! -nargs=* -complete=file PRevert :!g4 revert %
-command! -nargs=* -complete=file PDiff :!g4 diff %
-
-function! s:CheckOutFile()
- if filereadable(expand("%")) && ! filewritable(expand("%"))
-   let s:pos = getpos('.')
-   let option = confirm("Readonly file, do you want to checkout from p4?"
-         \, "&Yes\n&No", 1, "Question")
-   if option == 1
-     PEdit
-   endif
-   edit!
-   call cursor(s:pos[1:3])
- endif
-endfunction
-au FileChangedRO * nested :call <SID>CheckOutFile()
-
-function! HighlightTooLongLines()
-  highlight def link RightMargin Error
-  if &textwidth != 0
-    exec ('match RightMargin /\%<' . (&textwidth + 3) . 'v.\%>' . (&textwidth + 1) . 'v/')
-  endif
-endfunction
-
-augroup filetypedetect
-au WinEnter,BufNewFile,BufRead * call HighlightTooLongLines()
-augroup END
-
-" Highlight Search Results
-set hlsearch
-
-" Set Tab Movement
-nnoremap tj  :tabnext<CR>
-nnoremap tk  :tabprev<CR>
-
-" Set Tab movements ALT keys.
-inoremap <M-Left> <Esc>:tabprev<CR>a
-inoremap <M-Right> <Esc>:tabnext<CR>a
-noremap <M-Left> <Esc>:tabprev<CR>
-noremap <M-Right> <Esc>:tabnext<CR>
-
-" Numbering
-function! NumberToggle()
-  if(&relativenumber == 1)
-    set number
-  else
-    set relativenumber
-  endif
-endfunc
-
-nnoremap <C-n> :call NumberToggle()<cr>
-au FocusLost * :set number
-au FocusGained * :set relativenumber
-autocmd InsertEnter * :set number
-autocmd InsertLeave * :set relativenumber
-
-" Automatically cd into the directory that the file is in
-autocmd BufEnter * execute "chdir ".escape(expand("%:p:h"), ' ')
-
-" This shows what you are typing as a command.  I love this!
-set showcmd
-
-command NoTrail %s/\s\+$//e
-
-" Solarized Colorscheme
+" ----- altercation/vim-colors-solarized settings -----
+" Toggle this to "light" for light colorscheme
 set background=dark
-if has('gui_running')
 
-else
-  let g:solarized_termcolors=256
-  set t_Co=256
-endif
+" Uncomment the next line if your terminal is not configured for solarized
+"let g:solarized_termcolors=256
+
+" Set the colorscheme
 colorscheme solarized
 
 
-" Powerline
-if has('gui_running')
-  set guifont=Ubuntu\ Mono\ derivative\ Powerline\ 13
-endif
+" ----- bling/vim-airline settings -----
+" Always show statusbar
 set laststatus=2
-set encoding=utf-8
-"let g:Powerline_symbols = 'fancy'
 
-" Color Column
-set cc=121
+" Fancy arrow symbols, requires a patched font
+" To install a patched font, run over to
+"     https://github.com/abertsch/Menlo-for-Powerline
+" download all the .ttf files, double-click on them and click "Install"
+" Finally, uncomment the next line
+"let g:airline_powerline_fonts = 1
+
+" Show PASTE if in paste mode
+let g:airline_detect_paste=1
+
+" Show airline for tabs too
+let g:airline#extensions#tabline#enabled = 1
+
+
+" ----- jistr/vim-nerdtree-tabs -----
+" Open/close NERDTree Tabs with \t
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+" To have NERDTree always open on startup
+let g:nerdtree_tabs_open_on_console_startup = 1
+
+
+" ----- scrooloose/syntastic settings -----
+let g:syntastic_error_symbol = '✘'
+let g:syntastic_warning_symbol = "▲"
+augroup mySyntastic
+  au!
+  au FileType tex let b:syntastic_mode = "passive"
+augroup END
+
+
+" ----- xolox/vim-easytags settings -----
+" Where to look for tags files
+set tags=./tags;,~/.vimtags
+" Sensible defaults
+let g:easytags_events = ['BufReadPost', 'BufWritePost']
+let g:easytags_async = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_resolve_links = 1
+let g:easytags_suppress_ctags_warning = 1
+
+" ----- majutsushi/tagbar settings -----
+" Open/close tagbar with \b
+nmap <silent> <leader>b :TagbarToggle<CR>
+" Uncomment to open tagbar automatically whenever possible
+"autocmd BufEnter * nested :call tagbar#autoopen(0)
+
+
+" ----- airblade/vim-gitgutter settings -----
+" Required after having changed the colorscheme
+hi clear SignColumn
+" In vim-airline, only display "hunks" if the diff is non-zero
+let g:airline#extensions#hunks#non_zero_only = 1
+
+
+" ----- Raimondi/delimitMate settings -----
+let delimitMate_expand_cr = 1
+augroup mydelimitMate
+  au!
+  au FileType markdown let b:delimitMate_nesting_quotes = ["`"]
+  au FileType tex let b:delimitMate_quotes = ""
+  au FileType tex let b:delimitMate_matchpairs = "(:),[:],{:},`:'"
+  au FileType python let b:delimitMate_nesting_quotes = ['"', "'"]
+augroup END
+
+
