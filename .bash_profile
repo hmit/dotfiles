@@ -35,12 +35,14 @@ emacs_pkgs[json-snatcher]="https://github.com/Sterlingg/json-snatcher.git"
 emacs_pkgs[json-reformat]="https://github.com/gongo/json-reformat.git"
 emacs_pkgs[json-mode]="https://github.com/joshwnj/json-mode.git"
 emacs_pkgs[elpy]="https://github.com/jorgenschaefer/elpy.git"
-
+emacs_pkgs[powerline]="https://github.com/milkypostman/powerline.git"
+emacs_pkgs[git-gutter]="https://github.com/syohex/emacs-git-gutter.git"
+emacs_pkgs[solarized]="https://github.com/sellout/emacs-color-theme-solarized.git"
 pushd "$HOME/.emacs.d" >/dev/null
 for i in "${!emacs_pkgs[@]}"
 do
     if [ ! -d "$i" ] ; then
-	git clone ${emacs_pkgs[$i]}
+	git clone ${emacs_pkgs[$i]} "$i"
 	ln -s "$i/$i.el" "$HOME/.emacs.d/"
     fi
 done
