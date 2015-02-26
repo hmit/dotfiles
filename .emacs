@@ -12,6 +12,8 @@
 			(list (concat home "/.emacs.d/mmm-mode"))
                         load-path))
 
+(setq custom-theme-load-path (append (list (concat home "/.emacs.d/solarized"))
+				     custom-theme-load-path))
 
 ;; Set up the keyboard so the delete key on both the regular keyboard
 ;; and the keypad delete the character under the cursor and to the right
@@ -335,24 +337,27 @@ go to the current line."
 
 (put 'downcase-region 'disabled nil)
 (custom-set-faces
-  ;; custom-set-faces was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((((class color) (min-colors 8)) (:foreground "orange" :weight bold))))
  '(font-lock-function-name-face ((((class color) (min-colors 8)) (:foreground "orange" :weight bold)))))
   ;; If there is more than one, they won't work right.
 
 (custom-set-variables
-  ;; custom-set-variables was added by Custom.
-  ;; If you edit it by hand, you could mess it up, so be careful.
-  ;; Your init file should contain only one such instance.
-  ;; If there is more than one, they won't work right.
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(git-gutter:added-sign "+")
+ '(git-gutter:deleted-sign "-")
+ '(git-gutter:modified-sign "~")
+ '(git-gutter:separator-sign "|")
  '(js2-auto-indent-p t)
  '(js2-cleanup-whitespace t)
  '(js2-enter-indents-newline t)
- '(js2-indent-on-enter-key t)
- )
+ '(js2-indent-on-enter-key t))
 
 (defun py-compile()
   (compile (concat "python " (buffer-name))))
@@ -446,3 +451,12 @@ go to the current line."
 (setq-default mode-line-format (list "%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification "   " mode-line-position
  `(vc-mode vc-mode)
    "  " mode-line-modes mode-line-misc-info "- " system-name mode-line-end-spaces))
+
+(add-hook 'after-init-hook 'global-git-gutter-mode)
+
+
+
+;; (require 'powerline)
+;; (powerline-default-theme)
+(load-theme 'solarized t)
+(setq frame-background-mode 'dark)
