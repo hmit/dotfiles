@@ -12,7 +12,7 @@
 (let ((default-directory "~/emacslib"))
   (normal-top-level-add-subdirs-to-load-path))
 
-(setq custom-theme-load-path (append (list (concat home "/.emacs.d/solarized"))
+(setq custom-theme-load-path (append (list (concat home "/.emacs.d/lisp/solarized"))
                                      custom-theme-load-path))
 
 ;; Set up the keyboard so the delete key on both the regular keyboard
