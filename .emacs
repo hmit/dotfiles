@@ -1,19 +1,14 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			 ("marmalade" . "https://marmalade-repo.org/packages/")
 			 ("melpa" . "http://melpa.milkbox.net/packages/")))
-;;
-;; Add emacslib to path
-;;
 
 (setq home (getenv "HOME"))
-(setq emacslib (concat home "/emacslib"))
 (let ((default-directory "~/.emacs.d/lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
-(let ((default-directory "~/emacslib"))
+(let ((default-directory "~/emacslib/"))
   (normal-top-level-add-subdirs-to-load-path))
-
-(setq custom-theme-load-path (append (list (concat home "/.emacs.d/lisp/solarized"))
-                                     custom-theme-load-path))
+(add-to-list 'load-path "~/dotfiles/emacs-lisp")
+(add-to-list 'custom-theme-load-path (concat home "/.emacs.d/lisp/solarized"))
 
 ;; Set up the keyboard so the delete key on both the regular keyboard
 ;; and the keypad delete the character under the cursor and to the right
@@ -346,15 +341,17 @@ go to the current line."
   ;; If there is more than one, they won't work right.
 
 (require 'git-gutter)
-(global-git-gutter-mode +1)
+(global-git-gutter-mode t)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(git-gutter:added-sign "+")
- '(git-gutter:deleted-sign "-")
- '(git-gutter:modified-sign "~")
+ '(git-gutter:window-width 2)
+ '(git-gutter:always-show-separator t)
+ '(git-gutter:added-sign "++")
+ '(git-gutter:deleted-sign "--")
+ '(git-gutter:modified-sign "~~")
  '(git-gutter:separator-sign "|")
  '(js2-auto-indent-p t)
  '(js2-cleanup-whitespace t)
@@ -425,13 +422,15 @@ go to the current line."
 (global-set-key (kbd "M-k") 'backward-kill-line)
 
 (require 'ido)
+(require 'ido-vertical-mode)
+(ido-mode t)
+(ido-vertical-mode t)
+(setq ido-vertical-show-count t)
 (setq ido-enable-flex-matching t)
 (setq ido-everywhere t)
-(ido-mode t)
 (setq ido-file-extensions-order '(".py" ".php" ".emacs" ".xml" ".el" ".ini" ".cfg" ".cnf"))
 (setq ido-create-new-buffer 'always)
 (setq ido-use-filename-at-point 'guess)
-(ido-mode t)
 (add-hook 'prog-mode-hook #'hs-minor-mode)
 (global-set-key (kbd "C-\\") (kbd "C-c @ C-c"))
 (require 'json-mode)
@@ -443,6 +442,7 @@ go to the current line."
   (lambda () (interactive)
     (call-interactively (intern (ido-completing-read
     "M-x " (all-completions "" obarray 'commandp))))))
+(setq show-paren-delay 0)
 (show-paren-mode 1) ;; the setq is mode specific and hence doesn't work sometimes
 (defun my-reload-init ()
   "reloads the profile file ~/.emacs"
@@ -458,3 +458,14 @@ go to the current line."
 (powerline-default-theme)
 (load-theme 'solarized t)
 (setq frame-background-mode 'dark)
+(require 'rainbow-delimiters)
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+(require 'paren)
+(set-face-background 'show-paren-match "#555")
+(set-face-attribute 'show-paren-match nil :weight 'ultra-bold)
+(require 'hl-line+)
+(global-hl-line-mode)
+(toggle-hl-line-when-idle 1)
+(require 'dired-subtree)
+(add-hook 'after-init-hook 'global-company-mode)

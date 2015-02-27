@@ -25,7 +25,7 @@ dotfiles_sync()
     local dot_file
     for dot_file in `ls -AB "$HOME/dotfiles"`
     do
-	if [[ ! "$dot_file" = "#"* ]] && [[ ! "$dot_file" = *"~" ]] && [[ ! "$dot_file" = ".git"* ]] && [[ ! "$dot_file" == "README"* ]] && [ ! -e "$HOME/$dot_file" ] ; then
+	if [[ ! "$dot_file" = "emacs-lisp" ]] && [[ ! "$dot_file" = "#"* ]] && [[ ! "$dot_file" = *"~" ]] && [[ ! "$dot_file" = ".git"* ]] && [[ ! "$dot_file" == "README"* ]] && [ ! -e "$HOME/$dot_file" ] ; then
 	    ln -v -s "$HOME/dotfiles/$dot_file" "$HOME"
 	fi
     done
@@ -48,6 +48,10 @@ emacsd_sync()
     emacs_pkgs[solarized]="https://github.com/sellout/emacs-color-theme-solarized.git"
     emacs_pkgs[rainbow-delims]="https://github.com/Fanael/rainbow-delimiters.git"
     emacs_pkgs[ido-vertical-mode]="https://github.com/gempesaw/ido-vertical-mode.el.git"
+    emacs_pkgs[dired-more]="https://github.com/Fuco1/dired-hacks.git"
+    emacs_pkgs[auto-complete]="https://github.com/auto-complete/auto-complete.git"
+    emacs_pkgs[company-mode]="https://github.com/company-mode/company-mode.git"
+    emacs_pkgs[key-chord]="https://github.com/emacsmirror/key-chord.git"
 
     local emacs_dir="$HOME/.emacs.d/lisp"
     [ -d "$emacs_dir" ] && mkdir -p "$emacs_dir"

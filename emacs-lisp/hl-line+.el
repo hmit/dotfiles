@@ -187,7 +187,7 @@
 ;; This will be ignored, since this is now defined by default in Emacs 22.
 ;; I include it here as a different face definition that you might want to try.
 ;;;###autoload
-(defface hl-line '((t (:background "SlateGray3"))) ; Try also (:underline "Yellow")
+(defface hl-line '((t (:background "Yellow"))) ; Try also (:underline "Yellow")
   "*Face to use for `hl-line-face'." :group 'hl-line)
 (setq hl-line-face 'hl-line)
 
