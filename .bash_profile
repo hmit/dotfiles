@@ -33,7 +33,9 @@ dotfiles_sync()
 
 emacsd_sync()
 {
-    [ -d "$HOME/.emacs.d" ] && mkdir -p "$HOME/.emacs.d"
+    [ ! -d "$HOME/.emacs.d" ] && mkdir -p "$HOME/.emacs.d"
+    local emacs_dir="$HOME/.emacs.d/lisp"
+    [ ! -d "$emacs_dir" ] && mkdir -p "$emacs_dir"
 
     local emacs_pkgs
     declare -A emacs_pkgs
@@ -53,8 +55,7 @@ emacsd_sync()
     emacs_pkgs[company-mode]="https://github.com/company-mode/company-mode.git"
     emacs_pkgs[key-chord]="https://github.com/emacsmirror/key-chord.git"
 
-    local emacs_dir="$HOME/.emacs.d/lisp"
-    [ -d "$emacs_dir" ] && mkdir -p "$emacs_dir"
+
     pushd "$emacs_dir" >/dev/null
     local i
     for i in "${!emacs_pkgs[@]}"
