@@ -462,7 +462,7 @@ go to the current line."
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'paren)
-(set-face-background 'show-paren-match "#555")
+(set-face-background 'show-paren-match "#aaa")
 (set-face-attribute 'show-paren-match nil :weight 'ultra-bold)
 (require 'hl-line+)
 (global-hl-line-mode)
