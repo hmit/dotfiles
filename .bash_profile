@@ -7,7 +7,7 @@ dotfiles_sync()
 
     # daily pull from remote
     pushd "$HOME/dotfiles" >/dev/null
-    local lcl_commit_id=`git log --pretty=%H HEAD~1..HEAD`
+    local lcl_commit_id=`git rev-parse HEAD`
     local remote=`git config --get remote.origin.url`
     local remote_commit_id=`git ls-remote $remote master | cut -f1`
     if [ "$lcl_commit_id" != "$remote_commit_id" ]; then
