@@ -19,12 +19,13 @@
 ;; Require a final newline in a file, to avoid confusing some tools
 (setq require-final-newline t)
 (setq indent-tabs-mode nil)
-(setq tab-width 4)
-(setq mustache-basic-offset 4)
+(setq tab-width 2)
+(setq python-indent 2)
+(setq mustache-basic-offset 2)
 
 (defun no-tabs-hook ()
-  (setq c-basic-offset 4)
-  (setq tab-width 4)
+  (setq c-basic-offset 2)
+  (setq tab-width 2)
   (setq indent-tabs-mode nil))
 
 ;; let emacs use the system clipboard
@@ -411,7 +412,7 @@ go to the current line."
          (delete-window (get-buffer-window (get-buffer "*compilation*"))))
         (t (message "Compilation %s" string))))
 
-(setq compilation-finish-functions 'compile-autoclose)
+;; (setq compilation-finish-functions 'compile-autoclose)
 ;; To use display buffer alist for this sort of task
 ;; (setq special-display-buffer-names "*compilation*")
 
@@ -462,11 +463,11 @@ go to the current line."
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 (require 'paren)
-(set-face-background 'show-paren-match "#aaa")
+(set-face-background 'show-paren-match "#fff")
 (set-face-attribute 'show-paren-match nil :weight 'ultra-bold)
 (require 'hl-line+)
 (global-hl-line-mode)
 (set-face-foreground 'highlight nil)
 ;; (toggle-hl-line-when-idle 1)
 ;; (require 'dired-subtree)
-(add-hook 'after-init-hook 'global-company-mode)
+;; (add-hook 'after-init-hook 'global-company-mode)
