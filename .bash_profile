@@ -1,4 +1,3 @@
-
 dotfiles_sync()
 {
     # clone my dotfiles
@@ -7,16 +6,14 @@ dotfiles_sync()
     fi
 
     # daily pull from remote
-    local day=`date +%-w`
-    local prev=$(((($day+6))%7))
-    local pref="$HOME/.sync_record"
-    if [ ! -e "$pref.$day" ] ; then
-	pushd "$HOME/dotfiles" >/dev/null
-	git stash; git pull --rebase; git stash pop 2>/dev/null
-	popd >/dev/null
-	rm -rf "$pref".* 2>/dev/null
-	touch "$pref.$day"
+    pushd "$HOME/dotfiles" >/dev/null
+    local lcl_commit_id=`git log --pretty=%H HEAD~1..HEAD`
+    local remote=`git config --get remote.origin.url`
+    local remote_commit_id=`git ls-remote $remote master | cut -f1`
+    if [ "$lcl_commit_id" != "$remote_commit_id" ]; then
+	git stash; git pull --rebase; git stash pop
     fi
+    popd >/dev/null
 
     # include .bashrc if it exists
     [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
