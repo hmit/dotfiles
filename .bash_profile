@@ -8,8 +8,7 @@ dotfiles_sync()
     # daily pull from remote
     pushd "$HOME/dotfiles" >/dev/null
     local lcl_commit_id=`git rev-parse HEAD`
-    local remote=`git config --get remote.origin.url`
-    local remote_commit_id=`git ls-remote $remote master | cut -f1`
+    local remote_commit_id=`git ls-remote git@github.com:hmit/dotfiles.git master | cut -f1`
     if [ "$lcl_commit_id" != "$remote_commit_id" ]; then
 	git stash; git pull --rebase; git stash pop
     fi
