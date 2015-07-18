@@ -4,15 +4,21 @@ dotfiles_sync()
     if [ ! -d "$HOME/dotfiles" ] ; then
 	git clone git@github.com:hmit/dotfiles.git
     fi
-
+    local day=`date +%-w`
+    local prev=$(((($day+6))%7))
+    local pref="$HOME/.sync_record"
     # daily pull from remote
-    pushd "$HOME/dotfiles" >/dev/null
-    local lcl_commit_id=`git rev-parse HEAD`
-    local remote_commit_id=`git ls-remote git@github.com:hmit/dotfiles.git master | cut -f1`
-    if [ "$lcl_commit_id" != "$remote_commit_id" ]; then
-	git stash; git pull --rebase; git stash pop
+    if [ ! -e "$pref.$day" ]; then
+	pushd "$HOME/dotfiles" >/dev/null
+	local lcl_commit_id=`git rev-parse HEAD`
+	local remote_commit_id=`git ls-remote git@github.com:hmit/dotfiles.git master | cut -f1`
+	if [ "$lcl_commit_id" != "$remote_commit_id" ]; then
+	    git stash; git pull --rebase; git stash pop
+	fi
+	popd >/dev/null
+	rm -rf "$pref".* 2>/dev/null
+        touch "$pref.$day"
     fi
-    popd >/dev/null
 
     # include .bashrc if it exists
     [ -r "$HOME/.bashrc" ] && . "$HOME/.bashrc"
