@@ -104,7 +104,7 @@ else
     PS1="\[\033[01;37m\][\[\033[01;31m\]\u\[\033[01;37m\]@\[\033[01;32m\]\h\[\033[01;37m\]] [\[\033[01;34m\]\w\[\033[01;37m\]]\$ \[\033[00m\]"
 fi
 
-export PROMPT_COMMAND="history -a; history -c; history -r; if [ $TERM = 'screen' ]; then echo -ne '\033k${USER}@${HOSTNAME}\033\\'; fi;$PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; history -c; history -r;"
 
 [ -r "$HOME/.aliases" ] && . "$HOME/.aliases"
 # Alias definitions.
