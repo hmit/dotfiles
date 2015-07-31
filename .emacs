@@ -471,3 +471,4 @@ go to the current line."
 ;; (toggle-hl-line-when-idle 1)
 ;; (require 'dired-subtree)
 ;; (add-hook 'after-init-hook 'global-company-mode)
+ (require 'go-mode-autoloads)

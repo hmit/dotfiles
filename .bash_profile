@@ -56,7 +56,7 @@ emacsd_sync()
     emacs_pkgs[auto-complete]="https://github.com/auto-complete/auto-complete.git"
     emacs_pkgs[company-mode]="https://github.com/company-mode/company-mode.git"
     emacs_pkgs[key-chord]="https://github.com/emacsmirror/key-chord.git"
-
+    emacs_pkgs[golang-mode]="https://github.com/dominikh/go-mode.el.git"
 
     pushd "$emacs_dir" >/dev/null
     local i
