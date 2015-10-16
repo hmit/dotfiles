@@ -5,9 +5,6 @@
 (setq home (getenv "HOME"))
 (let ((default-directory "~/.emacs.d/lisp/"))
   (normal-top-level-add-subdirs-to-load-path))
-(let ((default-directory "~/emacslib/"))
-  (normal-top-level-add-subdirs-to-load-path))
-(add-to-list 'load-path "~/dotfiles/emacs-lisp")
 (add-to-list 'custom-theme-load-path (concat home "/.emacs.d/lisp/solarized"))
 
 ;; Set up the keyboard so the delete key on both the regular keyboard
@@ -37,16 +34,16 @@
 (setq web-mode-css-offset 2)
 (setq web-mode-script-offset 4)
 
+(require 'js2-mode)
+(require 'mustache-mode)
+(require 'web-mode)
+(require 'thrift-mode)
+
 (setq font-lock-maximum-decoration
       '((web-mode . 1)
         (js2-mode . 1)
         (python-mode . 1)
         (mustache-mode . 1)))
-
-(autoload 'mustache-mode "mustache-mode" nil t)
-(autoload 'js2-mode "js2" nil t)
-(autoload 'web-mode "web-mode" nil t)
-(autoload 'thrift-mode "thrift" nil t)
 
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;; (add-to-list 'auto-mode-alist '("\\.php$" . web-mode))
