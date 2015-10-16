@@ -57,7 +57,8 @@ emacsd_sync()
     emacs_pkgs[company-mode]="https://github.com/company-mode/company-mode.git"
     emacs_pkgs[key-chord]="https://github.com/emacsmirror/key-chord.git"
     emacs_pkgs[golang-mode]="https://github.com/dominikh/go-mode.el.git"
-
+    emacs_pkgs[js2-mode]="https://github.com/mooz/js2-mode.git"
+    
     pushd "$emacs_dir" >/dev/null
     local i
     for i in "${!emacs_pkgs[@]}"
