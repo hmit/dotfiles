@@ -88,7 +88,7 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
-[ -r "$HOME/.mylikesrc" ] && . "$HOME/.mylikesrc"
+[ -r "$HOME/.uberrc" ] && . "$HOME/.uberrc"
 
 export PATH="$HOME/bin:/usr/local/opt/emacs/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
@@ -146,8 +146,12 @@ function marks {
     ls -l "$MARKPATH" | sed 's/  / /g' | cut -d' ' -f9- | sed 's/ -/\t-/g' && echo
 }
 _completemarks() {
+    command=find
+    if hash gfind 2>/dev/null; then
+	command=gfind
+    fi
     local curw=${COMP_WORDS[COMP_CWORD]}
-    local wordlist=$(find $MARKPATH -type l -printf "%f\n")
+    local wordlist=$($command $MARKPATH -type l -printf "%f\n")
     COMPREPLY=($(compgen -W '${wordlist[@]}' -- "$curw"))
     return 0
 }
@@ -155,3 +159,4 @@ _completemarks() {
 complete -F _completemarks jump unmark
 export ANDROID_HOME=/Users/harshit/Library/Android/sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
+export UNISONLOCALHOSTNAME=vader
