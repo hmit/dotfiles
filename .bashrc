@@ -159,4 +159,5 @@ _completemarks() {
 complete -F _completemarks jump unmark
 export ANDROID_HOME=/Users/harshit/Library/Android/sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
-export UNISONLOCALHOSTNAME=vader
+alias byobu="export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock; byobu"
+
