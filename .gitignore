@@ -1,3 +1,72 @@
+*.py[cod]
+*.orig
+
+# No local dbs
+*.db
+
+# C extensions
+*.so
+
+# OS X Junk
+.DS_Store
+
+# Packages
+*.egg
+*.egg-info
+
+bin
+build
+develop-eggs
+dist
+eggs
+parts
+sdist
+var
+
+.installed.cfg
+lib64
+__pycache__
+
+# Installer logs
+pip-log.txt
+
+# Unit test / coverage reports
+.coverage
+.tox
+.noseids
+
+# Translations
+*.mo
+
+# Ignore python virtual environments
+env
+
+# Ignore local logs
+logs/*
+!logs/.gitkeep
+
+# Ignore local log
+npm-debug.log
+
+# Ignore docs
+docs/_build/*
+
+# ignore ipython profile stuff
+config/profile_default/
+!config/profile_default/ipython_config.py
+config/README
+protobuf/*.py
+
+.phutil_module_cache
+
+# Ignore coverage output
+coverage.xml
+coverage/
+
+# ignore IDE folder
+.idea/
+
+# ignore temp files
 *~
-*.swp
 \#.*
+.\#.*
