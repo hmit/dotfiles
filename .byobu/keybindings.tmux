@@ -5,11 +5,6 @@ unbind -n F6
 unbind -n C-a
 set -qg prefix ^a
 
-# enable mouse support;
-# TODO: enable mouse support somewhere; doesn't work right now
-set -qg mouse-resize-pane on
-set -qg mouse-select-pane on
-
 # shorter repeats; allows to use arrow keys to move around in a pane right away!
 # not using repeat functionality anyway
 set -qg repeat-time 150
