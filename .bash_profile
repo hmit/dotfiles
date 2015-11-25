@@ -62,6 +62,8 @@ emacsd_sync()
     emacs_pkgs[web-mode]="https://github.com/fxbois/web-mode.git"
     emacs_pkgs[thrift-mode]="https://github.com/evnm/emacs.git"
     emacs_pkgs[myEmacsFiles]="https://github.com/hmit/emacsFiles.git"
+    emacs_pkgs[flycheck]="https://github.com/flycheck/flycheck.git"
+    emacs_pkgs[jshint-mode]="https://github.com/daleharvey/jshint-mode.git"
 
     pushd "$emacs_dir" >/dev/null
     local i

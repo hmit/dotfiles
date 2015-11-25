@@ -92,7 +92,6 @@ fi
 
 export PATH="$HOME/bin:/usr/local/opt/emacs/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk-amd64
 export AWS_CONFIG_FILE=$HOME/.s3cfg
 
 export GOPATH=$ROOT/go
@@ -160,4 +159,3 @@ complete -F _completemarks jump unmark
 export ANDROID_HOME=/Users/harshit/Library/Android/sdk
 export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 alias byobu="export SSH_AUTH_SOCK=~/.ssh/ssh_auth_sock; byobu"
-
