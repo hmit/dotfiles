@@ -118,6 +118,7 @@ export PROMPT_COMMAND="history -a; history -c; history -r;"
 [ -r "$HOME/.`hostname`rc" ] && . "$HOME/.`hostname`rc"   # load any host specific file if it exists
 
 function oneline {
+    local bname
     bname=`git rev-parse --abbrev-ref HEAD`
     if [ ! -z $1 ]
     then
@@ -125,6 +126,16 @@ function oneline {
     fi
     echo "for branch $bname"
     git log --oneline $bname | head -n 15
+}
+
+function shortlog {
+    local bname
+    bname=`git rev-parse --abbrev-ref HEAD`
+    if [ ! -z $1 ]; then
+	bname=$1
+    fi
+    echo "for branch $bname"
+    git log --pretty=format:"%h   %<(15,trunc)%aE %<(15,trunc)%ar %s" $bname | head -n 15
 }
 export EDITOR='emacs'
 export LESS='-imj5$R'
