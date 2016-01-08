@@ -8,11 +8,6 @@ import sys
 import time
 
 from collections import defaultdict, namedtuple
-from util import base_db
-from util import redisutils
-from util import textutils
-
-rds = redisutils.get_conn()
 
 def counter(listt):
     cnt = dict.fromkeys(range(0, 100), 0)
