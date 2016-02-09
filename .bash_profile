@@ -2,7 +2,8 @@ dotfiles_sync()
 {
     # clone my dotfiles
     if [ ! -d "$HOME/dotfiles" ] ; then
-	git clone git@github.com:hmit/dotfiles.git
+	cd $HOME && git clone git@github.com:hmit/dotfiles.git
+	curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o $HOME/dotfiles/.prompt-git.sh
     fi
     local day=`date +%-w`
     local prev=$(((($day+6))%7))

@@ -89,6 +89,7 @@ if ! shopt -oq posix; then
   fi
 fi
 [ -r "$HOME/.uberrc" ] && . "$HOME/.uberrc"
+[ -r "$HOME/.prompt-git.sh" ] && . "$HOME/.prompt-git.sh"
 
 export PATH="$HOME/bin:/usr/local/opt/emacs/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
@@ -101,7 +102,7 @@ if [ "$TERM" = "dumb" ] ; then
     export PS1="[\u@\h] [\w] > "
     unset GREP_OPTIONS
 else
-    PS1="\[\033[01;37m\][\[\033[01;31m\]\u\[\033[01;37m\]@\[\033[01;32m\]\h\[\033[01;37m\]] [\[\033[01;34m\]\w\[\033[01;37m\]]\$ \[\033[00m\]"
+    PS1="\[\033[01;37m\][\[\033[01;31m\]\u\[\033[01;37m\]@\[\033[01;32m\]\h\[\033[01;37m\]] [\[\033[01;34m\]\w\[\033[01;37m\]]$(__git_ps1 ' (%s)')\$ \[\033[00m\]"
 fi
 
 export PROMPT_COMMAND="history -a; history -c; history -r;"
@@ -120,8 +121,7 @@ export PROMPT_COMMAND="history -a; history -c; history -r;"
 function oneline {
     local bname
     bname=`git rev-parse --abbrev-ref HEAD`
-    if [ ! -z $1 ]
-    then
+    if [ ! -z $1 ]; then
 	bname=$1
     fi
     echo "for branch $bname"
