@@ -91,7 +91,9 @@ fi
 [ -r "$HOME/.uberrc" ] && . "$HOME/.uberrc"
 [ -r "$HOME/.prompt-git.sh" ] && . "$HOME/.prompt-git.sh"
 
-export PATH="$HOME/bin:/usr/local/opt/emacs/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:$PATH"
+export ANDROID_HOME=/Users/harshit/Library/Android/sdk
+export RBENV_SHELL=bash
+export PATH="/Users/harshit/.rbenv/shims:${ANDROID_HOME}/platform-tools:${ANDROID_HOME}/tools:${HOME}/.rbenv/bin:${HOME}/bin:/usr/local/opt/emacs/bin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/bin:${PATH}"
 export PYTHONPATH=$PYTHONPATH:$ROOT/python:$ROOT/python/stubs:.
 export AWS_CONFIG_FILE=$HOME/.s3cfg
 
@@ -167,7 +169,5 @@ _completemarks() {
 }
 
 complete -F _completemarks jump unmark
-export ANDROID_HOME=/Users/harshit/Library/Android/sdk
-export PATH=$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools:$PATH
 alias venv="virtualenv env"
 alias activate="source env/bin/activate"
