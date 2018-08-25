@@ -1,0 +1,25 @@
+[user]
+	name = Harshit Mittal
+	email = harshit@uber.com
+[branch]
+	autosetuprebase = always
+[rerere]
+	enabled = true
+[url "ssh://gitolite@code.uber.internal/"]
+	insteadOf = git://code.uber.internal/
+[url "ssh://git@github.com/uber/"]
+	insteadOf = https://github.com/uber/
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+	bdiff = "!f() { git diff `git merge-base origin/master HEAD`..HEAD; }; f"
+[url "ssh://code.uber.internal/"]
+	insteadOf = https://code.uber.internal/
+[url "ssh://config.uber.internal/"]
+	insteadOf = https://config.uber.internal/
+[http "https://gopkg.uberinternal.com"]
+	followRedirects = true
+[http "https://gopkg.in"]
+	followRedirects = true
